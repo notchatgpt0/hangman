@@ -42,11 +42,14 @@ while has_letter or has_digit or has_symbol:
 # checks to see if the inputted password has a letter and digit
 
 wrong_letters = 0
-wrong_letter_list = []
+letter_list = []
 # stores all the wrong letters the player guessed
+unused_letters = list("abcdefghijklmnopqrstuvwxyz")
+# this list is used to prevent a player from guessing the same letter again
 list_of_words = ["tree", "car", "nickel", "hangman", "penny", "apple", "battery", "rocket", "music", "eat", "football", "basketball", "baseball", "soccer", "softball", "tennis", "phone", "computer", "spray"]
 # the list of words that the program can choose from
-selected_word = random.choice(list_of_words)
+selected_index = random.randint(0, len(list_of_words) - 1)
+selected_word = list_of_words[selected_index]
 # chooses a random word and puts gives it to the user for them to guess
 correct_letters = 0
 # counts how many correct letters were guessed
@@ -68,17 +71,26 @@ print(" ".join(display))
 
 while "_" in display and wrong_letters < guesses:
     user_input = input("Guess a letter: ").lower()
-    if len(user_input) != 1 or user_input == "":
+    if len(user_input) != 1 or not user_input.isalpha():
         print("Please enter a single letter only. Try again.")
         continue
+        # only allows single letter inputs
+    if user_input not in unused_letters:
+        print("You already guessed " + user_input + "! Try a different letter.")
+        continue
+        # prevents players from guessing the same letters multiple times
+    unused_letters.remove(user_input)
+    # removes used letters from the list
+    letter_list.append(user_input)
+    # adds used letters into a new list
     if guess(user_input, selected_word, display):
         print("Correct guess! You still have " + str(guesses - wrong_letters) + " guesses left!")
         correct_letters += selected_word.count(user_input)
     else:
         wrong_letters += 1
-        wrong_letter_list.append(user_input)
-        # appends wrong letters into the list
         print("Incorrect guess! You have " + str(guesses - wrong_letters) + " guesses left!")
+    print("Used letters: " + ", ".join(letter_list))
+    # prints used letters
     print(" ".join(display))
 # updates the display to show where the correct letters are if the player guesses it, if the player guesses wrong the amount of guesses they have left decreases
 if "_" not in display:
@@ -96,4 +108,4 @@ if correct_letters > 0:
     print(f"\tYou guessed {guess_ratio} time(s) for each correct guess.")
     # prints the guess ratio
 
-print("\tWrong letters guessed: " + str(wrong_letter_list))
+print("\tUsed letters: " + str(letter_list))
