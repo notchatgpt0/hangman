@@ -16,9 +16,6 @@ def guess(user_input, selected_word, display):
     else:
         return False
 
-
-
-
 inputted_password = input("Enter in the password required to start the game: ")
 # ask for the alphanumeric input
 
@@ -43,24 +40,33 @@ while has_letter or has_digit or has_symbol:
 
 wrong_letters = 0
 letter_list = []
-# stores all the wrong letters the player guessed
+# stores all the letters the player has guessed
 unused_letters = list("abcdefghijklmnopqrstuvwxyz")
 # this list is used to prevent a player from guessing the same letter again
+
 list_of_words = ["tree", "car", "nickel", "hangman", "penny", "apple", "battery", "rocket", "music", "eat", "football", "basketball", "baseball", "soccer", "softball", "tennis", "phone", "computer", "spray"]
-# the list of words that the program can choose from
+list_of_hints = ["nature", "vehicle", "n", "game", "coin", "fruit", "electronics", "space", "entertainment", "action", "sport", "sport", "sport", "sport", "sport", "sport", "technology", "technology", "action"]
+# parallel lists — same index refers to the same word and its hint
+
 selected_index = random.randint(0, len(list_of_words) - 1)
 selected_word = list_of_words[selected_index]
-# chooses a random word and puts gives it to the user for them to guess
+selected_hint = list_of_hints[selected_index]
+# chooses a random word and its matching hint using the same index
+
 correct_letters = 0
 # counts how many correct letters were guessed
 
 length = len(selected_word)
 if length > 6:
-    guesses = 12
+    guesses = 10
 else:
     guesses = 8
-# code above sets everything to the default value at the start
+# code above sets everything to the default value at the start. the harder the word is, the more guesses you have for fairness
+
+print("Hint: This word is related to " + selected_hint)
+# prints the hint
 print("Your word has " + str(length) + " letters, and you have " + str(guesses) + " guesses.")
+# prints word statistics
 print("Begin guessing letters")
 # tells the player to start guessing letters
 
@@ -93,6 +99,7 @@ while "_" in display and wrong_letters < guesses:
     # prints used letters
     print(" ".join(display))
 # updates the display to show where the correct letters are if the player guesses it, if the player guesses wrong the amount of guesses they have left decreases
+
 if "_" not in display:
     print("You won!")
     # checks if the player has guessed all of the letters and revealed the word
