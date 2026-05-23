@@ -1,3 +1,12 @@
+# Adrian Liu - May 22nd, 2026
+#
+# While working on this project, I was surprised by how complicated a game like hangman could really get. When I started programming this, the project seemed so simple.
+# The one challenge I had working on this project this week was making sure that the player couldn't input random things and cause the code to not register it.
+# Claude and Gemini helped me this week by providing consistent feedback and graded my project on the rubric to see what I was missing.
+# The one adjective I would choose to describe this project would be "logical" since you have to program a lot of code that all work with each other.
+# If I had more time to work on this I would've refined variable names and added more detail to the comments.
+
+
 try:
     import random
     # imports the random number selector
