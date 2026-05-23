@@ -42,6 +42,8 @@ while has_letter or has_digit or has_symbol:
 # checks to see if the inputted password has a letter and digit
 
 wrong_letters = 0
+wrong_letter_list = []
+# stores all the wrong letters the player guessed
 list_of_words = ["tree", "car", "nickel", "hangman", "penny", "apple", "battery", "rocket", "music", "eat", "football", "basketball", "baseball", "soccer", "softball", "tennis", "phone", "computer", "spray"]
 # the list of words that the program can choose from
 selected_word = random.choice(list_of_words)
@@ -74,6 +76,8 @@ while "_" in display and wrong_letters < guesses:
         correct_letters += selected_word.count(user_input)
     else:
         wrong_letters += 1
+        wrong_letter_list.append(user_input)
+        # appends wrong letters into the list
         print("Incorrect guess! You have " + str(guesses - wrong_letters) + " guesses left!")
     print(" ".join(display))
 # updates the display to show where the correct letters are if the player guesses it, if the player guesses wrong the amount of guesses they have left decreases
@@ -84,9 +88,12 @@ elif wrong_letters >= guesses:
     print("You've run out of guesses! The word was: " + selected_word)
     # if the player has ran out of guesses they will lose and be given the word
 
+print("Statistics:")
+
 if correct_letters > 0:
     guess_ratio = round(float(guesses / correct_letters), 2)
     # default difficulty ratio value, difficult ratio is based on guesses divided by correct letters
-    print("Your guessed " + str(guess_ratio) + " times for each correct guess.")
+    print(f"\tYou guessed {guess_ratio} time(s) for each correct guess.")
     # prints the guess ratio
-    
+
+print("\tWrong letters guessed: " + str(wrong_letter_list))
