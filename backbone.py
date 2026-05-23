@@ -52,6 +52,9 @@ print(" ".join(display))
 
 while "_" in display and wrong_letters < guesses:
     user_input = input("Guess a letter: ").lower()
+    if len(user_input) != 1 or user_input == "":
+        print("Please enter a single letter only. Try again.")
+        continue
     if user_input in selected_word:
         for i, letter in enumerate(selected_word):
             if letter == user_input:
@@ -67,6 +70,7 @@ while "_" in display and wrong_letters < guesses:
 if "_" not in display:
     print("You won!")
     # checks if the player has guessed all of the letters and revealed the word
+
 elif wrong_letters >= guesses:
     print("You've run out of guesses! The word was: " + selected_word)
     # if the player has ran out of guesses they will lose and be given the word
@@ -74,5 +78,6 @@ elif wrong_letters >= guesses:
 if correct_letters > 0:
     guess_ratio = round(float(guesses / correct_letters), 2)
     # default difficulty ratio value, difficult ratio is based on guesses divided by correct letters
+    
     print("Your score is " + str(guess_ratio) + " guesses per correct guess.")
     # prints the guess ratio
