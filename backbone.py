@@ -16,6 +16,14 @@ def guess(user_input, selected_word, display):
     else:
         return False
 
+def show_stats(guesses, correct_letters, letter_list):
+    # displays the statistics at the end of the game
+    print("Statistics:")
+    if correct_letters > 0:
+        guess_ratio = round(float(guesses / correct_letters), 2)
+        print(f"\tYou guessed {guess_ratio} time(s) for each correct guess.")
+    print("\tUsed letters: " + str(letter_list))
+
 inputted_password = input("Enter in the password required to start the game: ")
 # ask for the alphanumeric input
 
@@ -45,7 +53,7 @@ unused_letters = list("abcdefghijklmnopqrstuvwxyz")
 # this list is used to prevent a player from guessing the same letter again
 
 list_of_words = ["tree", "car", "nickel", "hangman", "penny", "apple", "battery", "rocket", "music", "eat", "football", "basketball", "baseball", "soccer", "softball", "tennis", "phone", "computer", "spray"]
-list_of_hints = ["nature", "vehicle", "n", "game", "coin", "fruit", "electronics", "space", "entertainment", "action", "sport", "sport", "sport", "sport", "sport", "sport", "technology", "technology", "action"]
+list_of_hints = ["nature", "vehicle", "coin", "game", "coin", "fruit", "electronics", "space", "entertainment", "action", "sport", "sport", "sport", "sport", "sport", "sport", "technology", "technology", "action"]
 # parallel lists — same index refers to the same word and its hint
 
 selected_index = random.randint(0, len(list_of_words) - 1)
@@ -61,7 +69,7 @@ if length > 6:
     guesses = 10
 else:
     guesses = 8
-# code above sets everything to the default value at the start. the harder the word is, the more guesses you have for fairness
+# code above sets everything to the default value at the start
 
 print("Hint: This word is related to " + selected_hint)
 # prints the hint
@@ -107,12 +115,4 @@ elif wrong_letters >= guesses:
     print("You've run out of guesses! The word was: " + selected_word)
     # if the player has ran out of guesses they will lose and be given the word
 
-print("Statistics:")
-
-if correct_letters > 0:
-    guess_ratio = round(float(guesses / correct_letters), 2)
-    # default difficulty ratio value, difficult ratio is based on guesses divided by correct letters
-    print(f"\tYou guessed {guess_ratio} time(s) for each correct guess.")
-    # prints the guess ratio
-
-print("\tUsed letters: " + str(letter_list))
+show_stats(guesses, correct_letters, letter_list)
