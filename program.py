@@ -1,4 +1,4 @@
-# Adrian Liu - May 22nd, 2026
+# [Name] - May 22nd, 2026
 #
 # While working on this project, I was surprised by how complicated a game like hangman could really get. When I started programming this, the project seemed so simple.
 # The one challenge I had working on this project this week was making sure that the player couldn't input random things and cause the code to not register it.
@@ -17,7 +17,7 @@ try:
     # prints the current date for the player
 
     def guess(user_input, selected_word, display):
-        # checks if the guessed letter is in the word and updates the display
+        ''' checks if the guessed letter is in the word and updates the display '''
         if user_input in selected_word:
             for i, letter in enumerate(selected_word):
                 if letter == user_input:
@@ -27,7 +27,7 @@ try:
             return False
 
     def show_stats(guesses, correct_letters, letter_list):
-        # displays the statistics at the end of the game
+        ''' displays the statistics at the end of the game '''
         print("Statistics:\n")
         if correct_letters > 0:
             guess_ratio = round(float(guesses / correct_letters), 2)
